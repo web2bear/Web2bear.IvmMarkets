@@ -1,9 +1,0 @@
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\bin\Debug\netstandard2.1\Web2bear.IvmMarkets.deps.json
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\bin\Debug\netstandard2.1\Web2bear.IvmMarkets.dll
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\bin\Debug\netstandard2.1\Web2bear.IvmMarkets.pdb
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\obj\Debug\netstandard2.1\Web2bear.IvmMarkets.csprojAssemblyReference.cache
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\obj\Debug\netstandard2.1\Web2bear.IvmMarkets.AssemblyInfoInputs.cache
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\obj\Debug\netstandard2.1\Web2bear.IvmMarkets.AssemblyInfo.cs
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\obj\Debug\netstandard2.1\Web2bear.IvmMarkets.csproj.CoreCompileInputs.cache
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\obj\Debug\netstandard2.1\Web2bear.IvmMarkets.dll
-C:\Users\Sbear\RiderProjects\Web2bear.IvmMarkets\obj\Debug\netstandard2.1\Web2bear.IvmMarkets.pdb
