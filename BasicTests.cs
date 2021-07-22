@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Web2bear.IvmMarkets
 {
@@ -8,9 +10,9 @@ namespace Web2bear.IvmMarkets
     {
         private readonly CalculationGraph _graph;
 
-        public BasicTests()
+        public BasicTests(ITestOutputHelper testOutput)
         {
-            _graph = new CalculationGraph()
+            _graph = new CalculationGraph(testOutput)
                 .With(new CalculationNode(CalcNode.Fab)
                     .InputFrom(CalcNode.A, CalcNode.B)
                     .UseFormula(v => v[CalcNode.A] + v[CalcNode.B])
@@ -73,6 +75,26 @@ namespace Web2bear.IvmMarkets
                 i => Assert.Equal(CalcNode.Fe, i),
                 i => Assert.Equal(CalcNode.Fe, i)
             );
+        }
+        
+        
+        [Fact]
+        public async Task MultisetShouldBeSafe()
+        {
+            var rnd =new Random();
+
+            var tasks =Enumerable.Range(1, 10000)
+                .Select(v =>DelayThenSend(v,rnd.Next(100, 500)) )
+                .Append(_graph.SendArg(CalcNode.C, 5, CalcNode.Fcd));
+            
+            await Task.WhenAll(tasks);
+
+        }
+
+        private async Task DelayThenSend(double v,int delay)
+        {
+           await Task.Delay(delay);
+           await _graph.SendArg(CalcNode.X, v, CalcNode.Fx);
         }
     }
 }

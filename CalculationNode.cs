@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,31 +14,32 @@ namespace Web2bear.IvmMarkets
 
     public class CalculationNode : ICalculationNode
     {
-        
-        private Func<Dictionary<CalcNode, double>, double> _formula;
-        
-        private Dictionary<CalcNode, double> _inputArgs;
+        private Func<ConcurrentDictionary<CalcNode, double>, double> _formula;
+
+        private ConcurrentDictionary<CalcNode, double> _inputArgs;
         private CalcNode _outputNodeId;
 
         public CalculationNode(CalcNode nodeId)
         {
             NodeId = nodeId;
             _formula = args => 1d;
-            _inputArgs = new Dictionary<CalcNode, double>();
+            _inputArgs = new ConcurrentDictionary<CalcNode, double>();
             _outputNodeId = CalcNode.Result;
         }
 
         public CalcNode NodeId { get; }
 
         public IGraphContext Graph { get; set; }
+
         public CalculationNode InputFrom(params CalcNode[] nodeIds)
         {
-            _inputArgs = nodeIds.ToDictionary(n => n, n => 0d);
+            _inputArgs = new ConcurrentDictionary<CalcNode, double>(
+                nodeIds.ToDictionary(n => n, n => 0d));
             return this;
         }
 
 
-        public CalculationNode UseFormula(Func<Dictionary<CalcNode, double>, double> formula)
+        public CalculationNode UseFormula(Func<ConcurrentDictionary<CalcNode, double>, double> formula)
         {
             _formula = formula;
             return this;
@@ -57,11 +58,9 @@ namespace Web2bear.IvmMarkets
 
             _inputArgs[node] = value;
 
-            var result =_formula(_inputArgs);
+            var result = _formula(_inputArgs);
 
             return Graph.SendArg(NodeId, result, _outputNodeId);
         }
-
-        
     }
 }

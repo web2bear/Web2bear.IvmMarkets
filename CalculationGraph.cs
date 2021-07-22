@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xunit.Abstractions;
 
 namespace Web2bear.IvmMarkets
 {
     public class CalculationGraph : IGraphContext
     {
+        private readonly ITestOutputHelper _testOutput;
         private readonly Dictionary<CalcNode, ICalculationNode> _nodes;
+        private double _calculationResult;
         public List<CalcNode> Calls { get; }
 
-        public CalculationGraph()
+        public CalculationGraph(ITestOutputHelper testOutput)
         {
+            _testOutput = testOutput;
             _nodes = new Dictionary<CalcNode, ICalculationNode>();
             Calls = new List<CalcNode>();
         }
@@ -40,6 +44,14 @@ namespace Web2bear.IvmMarkets
             return receiver.ProcessInput(argName, argValue);
         }
 
-        public double CalculationResult { get; set; }
+        public double CalculationResult
+        {
+            get => _calculationResult;
+            set
+            {
+                _testOutput.WriteLine(value.ToString());
+                _calculationResult = value;
+            }
+        }
     }
 }
