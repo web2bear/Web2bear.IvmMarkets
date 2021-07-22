@@ -4,8 +4,6 @@ namespace Web2bear.IvmMarkets
 {
     public interface IGraphContext
     {
-        Task SendTo<T>(SetInputCommand command);
-        
-        double CalculationResult { get; set; }
+        Task SendArg(CalcNode argName, double argValue, CalcNode receiverNodeId);
     }
 }

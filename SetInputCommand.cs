@@ -2,13 +2,13 @@
 {
     public class SetInputCommand
     {
-        public SetInputCommand(InputArgument argumentName, double argumentValue)
+        public SetInputCommand(CalcNode argumentName, double argumentValue)
         {
             ArgumentName = argumentName;
             ArgumentValue = argumentValue;
         }
 
-        public InputArgument ArgumentName { get; }
+        public CalcNode ArgumentName { get; }
         public double ArgumentValue { get; }
     }
 }

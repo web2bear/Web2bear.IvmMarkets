@@ -1,6 +1,6 @@
 ﻿namespace Web2bear.IvmMarkets
 {
-    public enum InputArgument
+    public enum CalcNode
     {
         A,
         B,
@@ -13,6 +13,7 @@
         Fy,
         Fx,
         Fcd,
-        Fe
+        Fe,
+        Result
     }
 }
